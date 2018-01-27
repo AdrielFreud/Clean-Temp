@@ -31,7 +31,7 @@ root = Tk()
 root.title('--=> Limpador by Adriel Freud <=--')
 
 root['bg'] = 'black'
-root.geometry("300x400+200+200")
+root.geometry("300x500+200+200")
 
 menubar = Menu(root)
 root.config(menu=menubar)
@@ -64,40 +64,57 @@ def clear_all():
 	print(menu)
 	print("\n\t[!] Limpando todos os arquivos temporarios!\n")
 	
+	os.chdir('C:\\Windows\\installer')
+	for installer in os.listdir('.'):
+		if os.path.isdir(prefetch) == True:
+			os.system('rmdir %s /S /Q'%installer)
+		else:
+			os.system('del %s /S /Q /F'%installer)
+
 	os.chdir('C:\\Windows\\Prefetch')
 	for prefetch in os.listdir('.'):
 		if os.path.isdir(prefetch) == True:
 			os.system('rmdir %s /S /Q'%prefetch)
 		else:
-			os.remove(prefetch)
+			os.system('del %s /S /Q /F'%prefetch)
 
 	os.chdir('C:\\Windows\\SoftwareDistribution\\Download')
 	for Software in os.listdir('.'):
 		if os.path.isdir(Software) == True:
 			os.system('rmdir %s /S /Q'%Software)
 		else:
-			os.remove(Software)
+			os.system('del %s /S /Q /F'%Software)
 	
-	os.chdir('C:\\Windows\\Temp')
-	for temp1 in os.listdir('.'):
-		if os.path.isdir(temp1) == True:
-			os.system('rmdir %s /S /Q'%temp1)
-		else:
-			os.remove(temp1)
+	try:
+		os.chdir('C:\\Windows\\Temp')
+		for temp1 in os.listdir('.'):
+			if os.path.isdir(temp1) == True:
+				os.system('rmdir %s /S /Q'%temp1)
+			else:
+				os.system('del %s /S /Q /F'%temp1)
+	except:
+		pass
 
-	os.chdir('C:\\Temp')
-	for temp2 in os.listdir('.'):
-		if os.path.isdir(temp2) == True:
-			os.system('rmdir %s /S /Q'%temp2)
-		else:
-			os.remove(temp2)
+	try:
+		os.chdir('C:\\Temp')
+		for temp2 in os.listdir('.'):
+			if os.path.isdir(temp2) == True:
+				os.system('rmdir %s /S /Q'%temp2)
+			else:
+				os.system('del %s /S /Q /F'%temp2)
+	except:
+		pass
 
 	os.chdir(temporario)
 	for temp3 in os.listdir('.'):
 		if os.path.isdir(temp3) == True:
 			os.system('rmdir %s /S /Q'%temp3)
 		else:
-			os.remove(temp3)
+			os.system('del %s /S /Q /F'%temp3)
+			
+	subprocess.Popen('ipconfig /flushdns', shell=True)
+	subprocess.Popen('RunDll32.exe inetcpl.cpl , ClearMyTracksByProcess 255', shell=True)
+	proc = subprocess.Popen('cleanmgr', shell=True)
 	print("")
 	print("\n\t[+] Diretorios Limpados com sucesso!\n\n")
 
@@ -111,21 +128,23 @@ def clear_temp():
 			if os.path.isdir(temp1) == True:
 				os.system('rmdir %s /S /Q'%temp1)
 			else:
-				os.remove(temp1)
-
+				os.system('del %s /S /Q /F'%temp1)
+	except:
+		print("\n\n\t[!!] Execute como Administrador!\n\n")
+	try:
 		os.chdir('C:\\Temp')
 		for temp2 in os.listdir('.'):
 			if os.path.isdir(temp2) == True:
 				os.system('rmdir %s /S /Q'%temp2)
 			else:
-				os.remove(temp2)
+				os.system('del %s /S /Q /F'%temp2)
 
 		os.chdir(temporario)
 		for temp3 in os.listdir('.'):
 			if os.path.isdir(temp3) == True:
 				os.system('rmdir %s /S /Q'%temp3)
 			else:
-				os.remove(temp3)
+				os.system('del %s /S /Q /F'%temp3)
 
 		print("\t[+++] Arquivos Limpados!\n\n")
 	except:
@@ -140,7 +159,7 @@ def clear_prefetch():
 			if os.path.isdir(prefetch) == True:
 				os.system('rmdir %s /S /Q'%prefetch)
 			else:
-				os.remove(prefetch)
+				os.system('del %s /S /Q /F'%prefetch)
 		print("\n\t[+++] Prefetch Limpada!\n\n")
 	except:
 		print("\n\n\t[!!] Execute como Administrador!\n\n")
@@ -148,16 +167,25 @@ def clear_prefetch():
 def clear_SoftwareDistribution():
 	print(menu)
 	print("\t[!!!] Limpando SoftwareDistribution!\n\n")
+
 	try:
+		os.chdir('C:\\Windows\\installer')
+		for installer in os.listdir('.'):
+			if os.path.isdir(installer) == True:
+				os.system('rmdir %s /S /Q'%installer)
+			else:
+				os.system('del %s /S /Q /F'%installer)
+
 		os.chdir('C:\\Windows\\SoftwareDistribution\\Download')
 		for Software in os.listdir('.'):
 			if os.path.isdir(Software) == True:
 				os.system('rmdir %s /S /Q'%Software)
 			else:
-				os.remove(Software)
+				os.system('del %s /S /Q /F'%Software)
 		print("\n\t[+++] Limpada!\n\n")
 	except:
 		print("\n\n\t[!!] Execute como Administrador!\n\n")
+
 
 info_sistema = Label(root, text='>Limpador de Arquivos Temporarios do Sistema<', bg='black', fg='green').place(x=10,y=10)
 temp = Button(root, text='Clean TEMP', bg='black', fg='green', width=30, command=clear_temp).place(x=35, y=50)
@@ -207,9 +235,21 @@ def Remove_Startup():
 	os.system('rmdir Startup-Cleandir /S /Q')
 	print('\n\t[!] Startup Removido!\n\n')
 
+def cleanmgr():
+	print(menu)
+	print("\n\n\t[@@@] Selecione todas as TextBox e Inicie uma Limpeza Profunda!\n\n")
+	proc = subprocess.Popen('cleanmgr', shell=True)
+	proc.wait()
+
+def clean_system():
+	print("\n\n\t[!!!] Limpeza de Cache do Sistema!\n\n")
+	subprocess.Popen('ipconfig /flushdns', shell=True)
+ 	subprocess.Popen('RunDll32.exe inetcpl.cpl , ClearMyTracksByProcess 255', shell=True)
+
 Startup = Button(root, text='ADD Startup', bg='black', fg='green', width=30, command=Add_Startup).place(x=35, y=280)
 remove_Startup = Button(root, text='REMOVE Startup', bg='black', fg='green', width=30, command=Remove_Startup).place(x=35, y=320)
-
-Label(root, text='Agradeca ao Adriel Freud, hahaha :) <3', fg='green', bg='black').place(x=35, y=360)
+Button(root, text='Limpeza de Disco', bg='black', fg='green', width=30, command=cleanmgr).place(x=35, y=360)
+Button(root, text='Limpeza de Cache do Systema', bg='black', fg='green', width=30, command=clean_system).place(x=35, y=400)
+Label(root, text='Agradeca ao Adriel Freud, hahaha :) <3', fg='green', bg='black').place(x=35, y=470)
 
 root.mainloop()
