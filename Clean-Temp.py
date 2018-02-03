@@ -63,59 +63,15 @@ filemenu.add_command(label='Exit', command=Exit)
 def clear_all():
 	print(menu)
 	print("\n\t[!] Limpando todos os arquivos temporarios!\n")
-	
-	os.chdir('C:\\Windows\\installer')
-	for installer in os.listdir('.'):
-		if os.path.isdir(prefetch) == True:
-			os.system('rmdir %s /S /Q'%installer)
-		else:
-			os.system('del %s /S /Q /F'%installer)
-
-	os.chdir('C:\\Windows\\Prefetch')
-	for prefetch in os.listdir('.'):
-		if os.path.isdir(prefetch) == True:
-			os.system('rmdir %s /S /Q'%prefetch)
-		else:
-			os.system('del %s /S /Q /F'%prefetch)
-
-	os.chdir('C:\\Windows\\SoftwareDistribution\\Download')
-	for Software in os.listdir('.'):
-		if os.path.isdir(Software) == True:
-			os.system('rmdir %s /S /Q'%Software)
-		else:
-			os.system('del %s /S /Q /F'%Software)
-	
 	try:
-		os.chdir('C:\\Windows\\Temp')
-		for temp1 in os.listdir('.'):
-			if os.path.isdir(temp1) == True:
-				os.system('rmdir %s /S /Q'%temp1)
-			else:
-				os.system('del %s /S /Q /F'%temp1)
+		clear_temp()
+		clear_prefetch()
+		clean_system()
+		cleanmgr()
+		clear_SoftwareDistribution()
 	except:
-		pass
+		print("\n\n\t[!!] Execute como Administrador!\n\n")
 
-	try:
-		os.chdir('C:\\Temp')
-		for temp2 in os.listdir('.'):
-			if os.path.isdir(temp2) == True:
-				os.system('rmdir %s /S /Q'%temp2)
-			else:
-				os.system('del %s /S /Q /F'%temp2)
-	except:
-		pass
-
-	os.chdir(temporario)
-	for temp3 in os.listdir('.'):
-		if os.path.isdir(temp3) == True:
-			os.system('rmdir %s /S /Q'%temp3)
-		else:
-			os.system('del %s /S /Q /F'%temp3)
-			
-	subprocess.Popen('ipconfig /flushdns', shell=True)
-	subprocess.Popen('RunDll32.exe inetcpl.cpl , ClearMyTracksByProcess 255', shell=True)
-	proc = subprocess.Popen('cleanmgr', shell=True)
-	print("")
 	print("\n\t[+] Diretorios Limpados com sucesso!\n\n")
 
 def clear_temp():
@@ -167,7 +123,6 @@ def clear_prefetch():
 def clear_SoftwareDistribution():
 	print(menu)
 	print("\t[!!!] Limpando SoftwareDistribution!\n\n")
-
 	try:
 		os.chdir('C:\\Windows\\installer')
 		for installer in os.listdir('.'):
@@ -182,6 +137,14 @@ def clear_SoftwareDistribution():
 				os.system('rmdir %s /S /Q'%Software)
 			else:
 				os.system('del %s /S /Q /F'%Software)
+
+		os.chdir('C:\\Windows\\Downloaded Program Files')
+		for ProgramFiles in os.listdir('.'):
+			if os.path.isdir(ProgramFiles) == True:
+				os.system('rmdir %s /S /Q'%ProgramFiles)
+			else:
+				os.system('del %s /S /Q /F'%ProgramFiles)
+				
 		print("\n\t[+++] Limpada!\n\n")
 	except:
 		print("\n\n\t[!!] Execute como Administrador!\n\n")
@@ -243,8 +206,16 @@ def cleanmgr():
 
 def clean_system():
 	print("\n\n\t[!!!] Limpeza de Cache do Sistema!\n\n")
+
 	subprocess.Popen('ipconfig /flushdns', shell=True)
  	subprocess.Popen('RunDll32.exe inetcpl.cpl , ClearMyTracksByProcess 255', shell=True)
+
+	os.chdir('C:\\Users\\adrie_000\\AppData\\Local\\Microsoft\\Windows\\INetCache\\IE')
+	for INetCache in os.listdir('.'):
+			if os.path.isdir(INetCache) == True:
+				os.system('rmdir %s /S /Q'%INetCache)
+			else:
+				os.system('del %s /S /Q /F'%INetCache)
 
 Startup = Button(root, text='ADD Startup', bg='black', fg='green', width=30, command=Add_Startup).place(x=35, y=280)
 remove_Startup = Button(root, text='REMOVE Startup', bg='black', fg='green', width=30, command=Remove_Startup).place(x=35, y=320)
