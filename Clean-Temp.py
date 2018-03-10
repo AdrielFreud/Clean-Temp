@@ -22,6 +22,7 @@ from Tkinter import *
 import sys
 import webbrowser
 import subprocess
+import threading
 
 os.system('color a')
 print(menu)
@@ -60,19 +61,23 @@ def Exit():
 
 filemenu.add_command(label='Exit', command=Exit)
 
+def call_all_functions():
+	list_thread = [clear_temp(), clear_prefetch(), clean_system(), cleanmgr(), clear_SoftwareDistribution()]
+	for threads in list_thread:
+		t = threading.Thread(target=threads, args=())
+		t.start()
+
+	for j in list_thread:
+		j.join()
+
 def clear_all():
 	print(menu)
 	print("\n\t[!] Limpando todos os arquivos temporarios!\n")
 	try:
-		clear_temp()
-		clear_prefetch()
-		clean_system()
-		cleanmgr()
-		clear_SoftwareDistribution()
+		call_all_functions()
+		print("\n\t[+] Diretorios Limpados com sucesso!\n\n")
 	except:
 		print("\n\n\t[!!] Execute como Administrador!\n\n")
-
-	print("\n\t[+] Diretorios Limpados com sucesso!\n\n")
 
 def clear_temp():
 	print(menu)
@@ -216,6 +221,12 @@ def clean_system():
 				os.system('rmdir %s /S /Q'%INetCache)
 			else:
 				os.system('del %s /S /Q /F'%INetCache)
+	os.chdir('C:\\WINDOWS\\Offline Web Pages')	
+	for Offline in os.listdir('.'):
+			if os.path.isdir(Offline) == True:
+				os.system('rmdir %s /S /Q'%Offline)
+			else:
+				os.system('del %s /S /Q /F'%Offline)
 
 Startup = Button(root, text='ADD Startup', bg='black', fg='green', width=30, command=Add_Startup).place(x=35, y=280)
 remove_Startup = Button(root, text='REMOVE Startup', bg='black', fg='green', width=30, command=Remove_Startup).place(x=35, y=320)
