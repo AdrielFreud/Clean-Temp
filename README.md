@@ -10,4 +10,5 @@ Limpador de Arquivos Temporarios do Windows - @Freud
   <li>Limpeza de Cache de Sistema.</li>
   <li>Modo Startup (Ao Reiniciar, inicie com o Limpador).</li>
 <ul>
+<br/>
 <IMG style="margin-left: 150px" src="http://test.fcen.co.in/foto.png">
