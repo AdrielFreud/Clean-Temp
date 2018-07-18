@@ -13,15 +13,13 @@ import tempfile, os, getpass, sys, webbrowser, subprocess, threading
 
 menu = """\n\n
 -----------------------------------------
-
   #  Desenvolvido por Adriel Freud!
   #  Contato: businessc0rp2k17@gmail.com 
   #  FB: http://www.facebook.com/xrn401
   #   =>DebutySecTeamSecurity<=
-
 -----------------------------------------
 \n"""
-os.system('color a')
+#os.system('color a')
 
 def call_all_functions():
 	list_thread = [clear_temp(), clear_prefetch(), clean_system(), cleanmgr(), clear_SoftwareDistribution()]
@@ -118,16 +116,15 @@ def clear_SoftwareDistribution():
 def Add_Startup():
 	print(menu)
 	print('\n\t[!!] Adicionado ao Startup!\n\n')
-	os.chdir('C:\\programdata')
+	os.chdir('C:\\ProgramData')
 	os.system('mkdir Startup-Cleandir')
-	os.chdir('Startup-Cleandir/')
+	os.chdir('Startup-Cleandir')
 	with open('start.vbs', 'w') as w:
 		w.write('Set WshShell = CreateObject("WScript.Shell")\nWshShell.Run chr(34) & "start.bat" & Chr(34), 0\nSet WshShell = Nothing')
 		w.close()
 		with open('clean.bat', 'w') as clean:
 			clean.write('''
 @echo off
-
 cd "C:\\Windows\\SoftwareDistribution\\Download"
 del * /S /Q /F
 rmdir * /S /Q
@@ -142,9 +139,9 @@ del * /S /Q /F
 rmdir * /S /Q
 cd %temp%
 del * /S /Q /F
-rmdir * /S /Q''')
+rmdir * /S /Q''').strip('\n')
 			clean.close()
-			subprocess.Popen(r'reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "CleanDIRS" /d "%ProgramData%\Startup-Cleandir\start.vbs" /f', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+			subprocess.Popen(r'reg add "HKCU\\SOFTWARE\\Microsoft\Windows\\CurrentVersion\\Run" /v "CleanDIRS" /d "%ProgramData%\\Startup-Cleandir\\start.vbs" /f', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
 
 def Remove_Startup():
 	print(menu)
@@ -183,7 +180,7 @@ class Layout(FloatLayout):
 	def __init__(self, **kwargs):
 		super(Layout, self).__init__(**kwargs)
 
-		self.add_widget(Label(text='>Limpador de Arquivos Temporarios do Sistema<', font_size="13sp", pos=(0, 230)))
+		self.add_widget(Label(text='Limpador de Arquivos Temporarios do Sistema', font_size="13sp", pos=(0, 230)))
 
 		temp = Button(text='Clean TEMP', width=250, height=30, font_size="13sp", pos=(22, 420))
 		temp.size_hint = None, None
@@ -197,7 +194,7 @@ class Layout(FloatLayout):
 		Distribution.size_hint = None, None
 		Distribution.on_press = clear_SoftwareDistribution
 
-		self.add_widget(Label(text='-=> Limpador em Massa de Arquivos <=-', font_size="13sp", pos=(0, 35)))
+		self.add_widget(Label(text='> Limpador em Massa de Arquivos <', font_size="13sp", pos=(0, 35)))
 
 		clean_all = Button(text='Clean ALL FILES', width=250, height=30, font_size="13sp", pos=(22, 240))
 		clean_all.size_hint = None, None

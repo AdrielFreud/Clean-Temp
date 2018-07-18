@@ -24,12 +24,12 @@ import webbrowser
 import subprocess
 import threading
 
-os.system('color a')
+#os.system('color a')
 print(menu)
 
 temporario = tempfile.gettempdir()
 root = Tk()
-root.title('[~ Limpador by Adriel ~]')
+root.title('-:[ Limpador by Adriel ]:-')
 
 root['bg'] = 'black'
 root.geometry("300x500+200+200")
@@ -155,13 +155,13 @@ def clear_SoftwareDistribution():
 		print("\n\n\t[!!] Execute como Administrador!\n\n")
 
 
-info_sistema = Label(root, text='>Limpador de Arquivos Temporarios do Sistema<', bg='black', fg='green').place(x=10,y=10)
-temp = Button(root, text='Clean TEMP', bg='black', fg='green', width=30, command=clear_temp).place(x=35, y=50)
-prefetch = Button(root, text='Clean PREFETCH', bg='black', fg='green', width=30, command=clear_prefetch).place(x=35, y=90)
-Distribution = Button(root, text='Clean SoftwareDistribution', bg='black', fg='green', width=30, command=clear_SoftwareDistribution).place(x=35, y=130)
+info_sistema = Label(root, text='Limpador de Arquivos Temporarios do Sistema', bg='black', fg='white', font="Arial 10").place(x=12,y=10)
+temp = Button(root, text='Clean TEMP', bg='#4F4F4F', fg='white', width=30, command=clear_temp).place(x=40, y=60)
+prefetch = Button(root, text='Clean PREFETCH', bg='#4F4F4F', fg='white', width=30, command=clear_prefetch).place(x=40, y=100)
+Distribution = Button(root, text='Clean SoftwareDistribution', bg='#4F4F4F', fg='white', width=30, command=clear_SoftwareDistribution).place(x=40, y=140)
 ####
-info_clean_all = Label(root, text='Limpar Todos os Arquivos Temporarios?', bg='black', fg='green').place(x=35,y=190)
-clean_all = Button(root, text='Clean ALL FILES', bg='black', fg='green', width=30, command=clear_all).place(x=35, y=240)
+info_clean_all = Label(root, text='> Limpador em Massa de Arquivos <', bg='black', fg='white', font="Arial 10").place(x=40, y=195)
+clean_all = Button(root, text='Clean ALL FILES', bg='#4F4F4F', fg='white', width=30, command=clear_all).place(x=40, y=250)
 
 # - Startup - #
 
@@ -192,9 +192,9 @@ del * /S /Q /F
 rmdir * /S /Q
 cd %temp%
 del * /S /Q /F
-rmdir * /S /Q''')
+rmdir * /S /Q''').strip('\n')
 			clean.close()
-			subprocess.Popen(r'reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "CleanDIRS" /d "%ProgramData%\Startup-Cleandir\start.vbs" /f', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+			subprocess.Popen(r'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v "CleanDIRS" /d "%ProgramData%\\Startup-Cleandir\\start.vbs" /f', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
 
 def Remove_Startup():
 	print(menu)
@@ -228,10 +228,10 @@ def clean_system():
 			else:
 				os.system('del %s /S /Q /F'%Offline)
 
-Startup = Button(root, text='ADD Startup', bg='black', fg='green', width=30, command=Add_Startup).place(x=35, y=280)
-remove_Startup = Button(root, text='REMOVE Startup', bg='black', fg='green', width=30, command=Remove_Startup).place(x=35, y=320)
-Button(root, text='Limpeza de Disco', bg='black', fg='green', width=30, command=cleanmgr).place(x=35, y=360)
-Button(root, text='Limpeza de Cache do Systema', bg='black', fg='green', width=30, command=clean_system).place(x=35, y=400)
-Label(root, text='Agradeca ao Adriel Freud <3', fg='green', bg='black').place(x=35, y=470)
+Startup = Button(root, text='ADD Startup', bg='#4F4F4F', fg='white', width=30, command=Add_Startup).place(x=40, y=290)
+remove_Startup = Button(root, text='REMOVE Startup', bg='#4F4F4F', fg='white', width=30, command=Remove_Startup).place(x=40, y=330)
+Button(root, text='Limpeza de Disco', bg='#4F4F4F', fg='white', width=30, command=cleanmgr).place(x=40, y=370)
+Button(root, text='Limpeza de Cache do Systema', bg='#4F4F4F', fg='white', width=30, command=clean_system).place(x=40, y=410)
+Label(root, text='[ Agradeca ao Adriel Freud <3 ]', fg='white', bg='black', font="Arial 11").place(x=46, y=460)
 
 root.mainloop()
