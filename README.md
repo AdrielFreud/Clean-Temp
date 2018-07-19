@@ -1,7 +1,6 @@
 # Clean-Temp
-Limpador de Arquivos Temporarios do Windows - @Freud
 
-Clean-Temp
+Limpador de Arquivos Temporarios do Windows - @Freud
 <ul>
   <li>Limpador de Arquivos Temporarios.</li>
   <li>Limpador de Cache de Programas que Criam files Temporarios.</li>
