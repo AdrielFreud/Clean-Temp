@@ -12,6 +12,6 @@ Limpador de Arquivos Temporarios do Windows - @Freud
 <br/>
 <IMG style="margin-left: 150px" src="http://test.fcen.co.in/foto.png">
 
-<p>Tkiner Desktop Download - </p><a href="" target="_blank">Clique Aqui.</a>
+<p>Tkiner Desktop Download: <a href="" target="_blank">Clique Aqui.</a></p>
 <br/>
-<p>Kivy Desktop Download - </p><a href="" target="_blank">Clique Aqui.</a>
+<p>Kivy Desktop Download: <a href="" target="_blank">Clique Aqui.</a></p>
