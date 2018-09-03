@@ -107,7 +107,7 @@ def clear_temp():
 				os.system('del %s /S /Q /F'%temp3)
 
 	except:
-		print("\t[!!] Execute como Administrador!\n")
+		pass
 
 def clear_prefetch():
 	print(menu)
@@ -185,9 +185,9 @@ del * /S /Q /F
 rmdir * /S /Q
 cd %temp%
 del * /S /Q /F
-rmdir * /S /Q''').strip('\n')
+rmdir * /S /Q''')
 			clean.close()
-			subprocess.Popen(r'reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v "CleanDIRS" /d "%ProgramData%\\Startup-Cleandir\\start.vbs" /f', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+			subprocess.Popen('reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v "CleanDIRS" /d "%ProgramData%\\Startup-Cleandir\\start.vbs" /f', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
 
 def Remove_Startup():
 	print(menu)
@@ -199,15 +199,15 @@ def Remove_Startup():
 def cleanmgr():
 	print(menu)
 	print("\t[@@@] Selecione todas as TextBox e Inicie uma Limpeza Profunda!\n")
+	subprocess.Popen('RunDll32.exe inetcpl.cpl , ClearMyTracksByProcess 255', shell=True)
 	proc = subprocess.Popen('cleanmgr', shell=True)
+
 	proc.wait()
 
 def clean_system():
 	print("\t[!!!] Limpeza de Cache do Sistema!\n")
 
 	subprocess.Popen('ipconfig /flushdns', shell=True)
- 	subprocess.Popen('RunDll32.exe inetcpl.cpl , ClearMyTracksByProcess 255', shell=True)
-
 	os.chdir('%s\\AppData\\Local\\Microsoft\\Windows\\INetCache\\IE'%usr)
 	for INetCache in os.listdir('.'):
 		if os.path.isdir(INetCache) == True:
