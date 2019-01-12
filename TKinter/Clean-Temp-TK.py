@@ -15,12 +15,10 @@ import threading
 
 menu = """\n\n
 -----------------------------------------
-
   #  Desenvolvido por Adriel Freud!
   #  Contato: businessc0rp2k17@gmail.com 
   #  FB: http://www.facebook.com/xrn401
   #   =>DebutySecTeamSecurity<=
-
 -----------------------------------------
 \n"""
 getuserprof = subprocess.check_output('set USERPROFILE', shell=True).split('=')
@@ -64,21 +62,9 @@ def Exit():
 filemenu.add_command(label='Exit', command=Exit)
 
 def call_all_functions():
-	list_thread = [clear_temp(), clear_prefetch(), clean_system(), cleanmgr(), clear_SoftwareDistribution()]
+	list_thread = [clear_temp(), clear_prefetch(), clear_SoftwareDistribution(), clean_system(), cleanmgr()]
 	for threads in list_thread:
-		t = threading.Thread(target=threads, args=())
-		t.start()
-
-	for j in list_thread:
-		j.join()
-
-def clear_all():
-	print(menu)
-	try:
-		call_all_functions()
-		print("\t[+] Diretorios Limpados com sucesso!\n")
-	except:
-		print("\t[!!] Execute como Administrador!\n")
+		threading.Thread(target=threads, args=()).start()
 
 def clear_temp():
 	print(menu)
@@ -98,7 +84,9 @@ def clear_temp():
 				os.system('rmdir %s /S /Q'%temp2)
 			else:
 				os.system('del %s /S /Q /F'%temp2)
-
+	except:
+		pass
+	try:
 		os.chdir(temporario)
 		for temp3 in os.listdir('.'):
 			if os.path.isdir(temp3) == True:
@@ -154,7 +142,7 @@ prefetch = Button(root, text='Clean PREFETCH', bg='#4F4F4F', fg='white', width=3
 Distribution = Button(root, text='Clean SoftwareDistribution', bg='#4F4F4F', fg='white', width=30, command=clear_SoftwareDistribution).place(x=40, y=140)
 ####
 info_clean_all = Label(root, text='> Limpador em Massa de Arquivos <', bg='black', fg='white', font="Arial 10").place(x=40, y=195)
-clean_all = Button(root, text='Clean ALL FILES', bg='#4F4F4F', fg='white', width=30, command=clear_all).place(x=40, y=250)
+clean_all = Button(root, text='Clean ALL FILES', bg='#4F4F4F', fg='white', width=30, command=call_all_functions).place(x=40, y=250)
 
 # - Startup - #
 
@@ -170,7 +158,6 @@ def Add_Startup():
 		with open('clean.bat', 'w') as clean:
 			clean.write('''
 @echo off
-
 cd "C:\\Windows\\SoftwareDistribution\\Download"
 del * /S /Q /F
 rmdir * /S /Q
@@ -199,19 +186,17 @@ def Remove_Startup():
 def cleanmgr():
 	print(menu)
 	print("\t[@@@] Selecione todas as TextBox e Inicie uma Limpeza Profunda!\n")
-	subprocess.Popen('RunDll32.exe inetcpl.cpl , ClearMyTracksByProcess 255', shell=True)
-	proc = subprocess.Popen('cleanmgr', shell=True)
-
-	proc.wait()
+	subprocess.Popen('RunDll32.exe inetcpl.cpl, ClearMyTracksByProcess 255', shell=True)
+	subprocess.Popen('cleanmgr', shell=True).wait()
 
 def clean_system():
 	print("\t[!!!] Limpeza de Cache do Sistema!\n")
-
 	subprocess.Popen('ipconfig /flushdns', shell=True)
 	os.chdir('%s\\AppData\\Local\\Microsoft\\Windows\\INetCache\\IE'%usr)
+
 	for INetCache in os.listdir('.'):
 		if os.path.isdir(INetCache) == True:
-			s.system('rmdir %s /S /Q'%INetCache)
+			os.system('rmdir %s /S /Q'%INetCache)
 		else:
 			os.system('del %s /S /Q /F'%INetCache)
 
