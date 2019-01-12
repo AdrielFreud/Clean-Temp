@@ -10,7 +10,7 @@ Limpador de Arquivos Temporarios do Windows - @Freud
   <li>Modo Startup (Ao Reiniciar, inicie com o Limpador).</li>
 </ul>
 <br/>
-<p><i>Tkinter</i> Desktop Download: <a href="https://mega.nz/#!XNUWzIxT!0DfrY12MDGKJF_1IH3RqSYUJAJTLVfhee-lm8m5exHc" target="_blank">Clique Aqui.</a></p>
+<p><i>Tkinter</i> Desktop Download: <a href="https://mega.nz/#!jEkGACjZ!mmw2zcadpxWCjE7bovqXNEhLdVOn9902EKRu1yswTJ8" target="_blank">Clique Aqui.</a></p>
 <IMG style="margin-left: 150px" src="https://i.imgur.com/eQfVRWS.png"/>
 <p><i>Kivy</i> Desktop Download: <a href="" target="_blank">Clique Aqui.</a></p>
 <IMG style="margin-left: 150px" src="https://i.imgur.com/lU4tS4O.png"/>
