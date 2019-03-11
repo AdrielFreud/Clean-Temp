@@ -3,7 +3,9 @@
 # FB: http://www.facebook.com/xrn401
 #   =>DebutySecTeamSecurity<=
 #conding: utf-8
-
+import win32console, win32gui
+window = win32console.GetConsoleWindow()
+win32gui.ShowWindow(window,0)
 import tempfile
 import os
 import getpass
@@ -12,8 +14,10 @@ import sys
 import webbrowser
 import subprocess
 import threading
+import tkMessageBox
+from ctypes import *
 
-menu = """\n\n
+cred = """\n\n
 -----------------------------------------
   #  Desenvolvido por Adriel Freud!
   #  Contato: businessc0rp2k17@gmail.com 
@@ -23,13 +27,12 @@ menu = """\n\n
 \n"""
 getuserprof = subprocess.check_output('set USERPROFILE', shell=True).split('=')
 usr = getuserprof[1].strip('\r\n')
-
+bar = "-:[ Limpador by Adriel ]:-'"
 #os.system('color a')
-print(menu)
 
 temporario = tempfile.gettempdir()
 root = Tk()
-root.title('-:[ Limpador by Adriel ]:-')
+root.title(bar)
 
 root['bg'] = 'black'
 root.geometry("300x500+200+200")
@@ -38,10 +41,13 @@ menubar = Menu(root)
 root.config(menu=menubar)
 filemenu = Menu(menubar)
 menubar.add_cascade(label='Menu', menu=filemenu)
+if windll.shell32.IsUserAnAdmin() == 0:
+	tkMessageBox.showwarning("Warning", "Execute como administrador para uma limpeza Profunda!")
+else:
+	pass
 
 def Creditos():
-	os.system('color a')
-	print(menu)
+	tkMessageBox.showinfo("Creditos", cred)
 
 filemenu.add_command(label='Creditos', command=Creditos)
 
@@ -65,9 +71,9 @@ def call_all_functions():
 	list_thread = [clear_temp(), clear_prefetch(), clear_SoftwareDistribution(), clean_system(), cleanmgr()]
 	for threads in list_thread:
 		threading.Thread(target=threads, args=()).start()
+	tkMessageBox.showinfo("Information", "Todos os arquivos inuteis foram retirados do seu computador, Obrigado por utilizar nosso programa! Att. AdrielFreud :)")
 
 def clear_temp():
-	print(menu)
 	try:
 		os.chdir('C:\\Windows\\Temp')
 		for temp1 in os.listdir('.'):
@@ -75,30 +81,22 @@ def clear_temp():
 				os.system('rmdir %s /S /Q'%temp1)
 			else:
 				os.system('del %s /S /Q /F'%temp1)
-	except:
-		pass
-	try:
 		os.chdir('C:\\Temp')
 		for temp2 in os.listdir('.'):
 			if os.path.isdir(temp2) == True:
 				os.system('rmdir %s /S /Q'%temp2)
 			else:
 				os.system('del %s /S /Q /F'%temp2)
-	except:
-		pass
-	try:
 		os.chdir(temporario)
 		for temp3 in os.listdir('.'):
 			if os.path.isdir(temp3) == True:
 				os.system('rmdir %s /S /Q'%temp3)
 			else:
 				os.system('del %s /S /Q /F'%temp3)
-
 	except:
 		pass
 
 def clear_prefetch():
-	print(menu)
 	try:
 		os.chdir('C:\\Windows\\Prefetch')
 		for prefetch in os.listdir('.'):
@@ -107,10 +105,9 @@ def clear_prefetch():
 			else:
 				os.system('del %s /S /Q /F'%prefetch)
 	except:
-		print("\t[!!] Execute como Administrador!\n")
+		pass
 
 def clear_SoftwareDistribution():
-	print(menu)
 	try:
 		os.chdir('C:\\Windows\\installer')
 		for installer in os.listdir('.'):
@@ -134,7 +131,7 @@ def clear_SoftwareDistribution():
 				os.system('del %s /S /Q /F'%ProgramFiles)
 				
 	except:
-		print("\t[!!] Execute como Administrador!\n")
+		pass
 
 info_sistema = Label(root, text='Limpador de Arquivos Temporarios do Sistema', bg='black', fg='white', font="Arial 10").place(x=12,y=10)
 temp = Button(root, text='Clean TEMP', bg='#4F4F4F', fg='white', width=30, command=clear_temp).place(x=40, y=60)
@@ -147,8 +144,7 @@ clean_all = Button(root, text='Clean ALL FILES', bg='#4F4F4F', fg='white', width
 # - Startup - #
 
 def Add_Startup():
-	print(menu)
-	print('\t[!!] Adicionado ao Startup!\n')
+	tkMessageBox.showinfo('Information', '[!!] Adicionado ao Startup!')
 	os.chdir('C:\\ProgramData')
 	os.system('mkdir Startup-Cleandir')
 	os.chdir('Startup-Cleandir/')
@@ -177,20 +173,17 @@ rmdir * /S /Q''')
 			subprocess.Popen('reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v "CleanDIRS" /d "%ProgramData%\\Startup-Cleandir\\start.vbs" /f', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
 
 def Remove_Startup():
-	print(menu)
-	print('\t[!] Removendo Startup!\n')
+	tkMessageBox.showinfo('Information', '[!] Removendo Startup!')
 	os.chdir('C:\\ProgramData')
 	os.system('rmdir Startup-Cleandir /S /Q')
 	print('\t[!] Startup Removido!\n')
 
 def cleanmgr():
-	print(menu)
-	print("\t[@@@] Selecione todas as TextBox e Inicie uma Limpeza Profunda!\n")
+	tkMessageBox.showinfo('Information', "[@@@] Selecione todas as TextBox e Inicie uma Limpeza Profunda!")
 	subprocess.Popen('RunDll32.exe inetcpl.cpl, ClearMyTracksByProcess 255', shell=True)
 	subprocess.Popen('cleanmgr', shell=True).wait()
 
 def clean_system():
-	print("\t[!!!] Limpeza de Cache do Sistema!\n")
 	subprocess.Popen('ipconfig /flushdns', shell=True)
 	os.chdir('%s\\AppData\\Local\\Microsoft\\Windows\\INetCache\\IE'%usr)
 
