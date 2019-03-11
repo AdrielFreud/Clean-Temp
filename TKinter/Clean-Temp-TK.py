@@ -27,8 +27,7 @@ cred = """\n\n
 \n"""
 getuserprof = subprocess.check_output('set USERPROFILE', shell=True).split('=')
 usr = getuserprof[1].strip('\r\n')
-bar = "-:[ Limpador by Adriel ]:-'"
-#os.system('color a')
+bar = "-:[ Limpador by Adriel ]:-"
 
 temporario = tempfile.gettempdir()
 root = Tk()
