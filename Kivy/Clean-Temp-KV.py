@@ -1,4 +1,14 @@
-import tempfile, os, getpass, sys, webbrowser, subprocess, threading, kivy
+# Desenvolvido por Adriel Freud!
+# Contato: businessc0rp2k17@gmail.com
+# FB: http://www.facebook.com/xrn401
+#   =>DebutySecTeamSecurity<=
+#conding: utf-8
+
+import win32console, win32gui
+window = win32console.GetConsoleWindow()
+win32gui.ShowWindow(window,0)
+import tempfile, os, getpass, sys, webbrowser, subprocess, threading, kivy, tkMessageBox
+from ctypes import *
 kivy.require('1.9.1')
 from kivy.app import App
 from kivy.uix.button import Button
@@ -25,25 +35,21 @@ menu = """\n\n
 getuserprof = subprocess.check_output('set USERPROFILE', shell=True).split('=')
 usr = getuserprof[1].strip('\r\n')
 
+if windll.shell32.IsUserAnAdmin() == 0:
+	tkMessageBox.showwarning("Warning", "Execute como administrador para uma limpeza Profunda!")
+else:
+	pass
+
+def Creditos():
+	tkMessageBox.showinfo("Creditos", cred)
+
 def call_all_functions():
-	list_thread = [clear_temp(), clear_prefetch(), clean_system(), cleanmgr(), clear_SoftwareDistribution()]
+	list_thread = [clear_temp(), clear_prefetch(), clear_SoftwareDistribution(), clean_system(), cleanmgr()]
 	for threads in list_thread:
-		t = threading.Thread(target=threads, args=())
-		t.start()
-
-	for j in list_thread:
-		j.join()
-
-def clear_all():
-	print(menu)
-	try:
-		call_all_functions()
-		print("\n\t[+] Diretorios Limpados com sucesso!\n")
-	except:
-		print("\t[!!] Execute como Administrador!\n")
+		threading.Thread(target=threads, args=()).start()
+	tkMessageBox.showinfo("Information", "Todos os arquivos inuteis foram retirados do seu computador, Obrigado por utilizar nosso programa! Att. AdrielFreud :)")
 
 def clear_temp():
-	print(menu)
 	try:
 		os.chdir('C:\\Windows\\Temp')
 		for temp1 in os.listdir('.'):
@@ -51,16 +57,12 @@ def clear_temp():
 				os.system('rmdir %s /S /Q'%temp1)
 			else:
 				os.system('del %s /S /Q /F'%temp1)
-	except:
-		print("\t[!!] Execute como Administrador!\n")
-	try:
 		os.chdir('C:\\Temp')
 		for temp2 in os.listdir('.'):
 			if os.path.isdir(temp2) == True:
 				os.system('rmdir %s /S /Q'%temp2)
 			else:
 				os.system('del %s /S /Q /F'%temp2)
-
 		os.chdir(temporario)
 		for temp3 in os.listdir('.'):
 			if os.path.isdir(temp3) == True:
@@ -68,10 +70,9 @@ def clear_temp():
 			else:
 				os.system('del %s /S /Q /F'%temp3)
 	except:
-		print("\t[!!] Execute como Administrador!\n")
+		pass
 
 def clear_prefetch():
-	print(menu)
 	try:
 		os.chdir('C:\\Windows\\Prefetch')
 		for prefetch in os.listdir('.'):
@@ -80,10 +81,9 @@ def clear_prefetch():
 			else:
 				os.system('del %s /S /Q /F'%prefetch)
 	except:
-		print("\t[!!] Execute como Administrador!\n")
+		pass
 
 def clear_SoftwareDistribution():
-	print(menu)
 	try:
 		os.chdir('C:\\Windows\\installer')
 		for installer in os.listdir('.'):
@@ -92,24 +92,25 @@ def clear_SoftwareDistribution():
 			else:
 				os.system('del %s /S /Q /F'%installer)
 
-			os.chdir('C:\\Windows\\SoftwareDistribution\\Download')
-			for Software in os.listdir('.'):
-				if os.path.isdir(Software) == True:
-					os.system('rmdir %s /S /Q'%Software)
-				else:
-					os.system('del %s /S /Q /F'%Software)
+		os.chdir('C:\\Windows\\SoftwareDistribution\\Download')
+		for Software in os.listdir('.'):
+			if os.path.isdir(Software) == True:
+				os.system('rmdir %s /S /Q'%Software)
+			else:
+				os.system('del %s /S /Q /F'%Software)
 
-			os.chdir('C:\\Windows\\Downloaded Program Files')
-			for ProgramFiles in os.listdir('.'):
-				if os.path.isdir(ProgramFiles) == True:
-					os.system('rmdir %s /S /Q'%ProgramFiles)
-				else:
-					os.system('del %s /S /Q /F'%ProgramFiles)
+		os.chdir('C:\\Windows\\Downloaded Program Files')
+		for ProgramFiles in os.listdir('.'):
+			if os.path.isdir(ProgramFiles) == True:
+				os.system('rmdir %s /S /Q'%ProgramFiles)
+			else:
+				os.system('del %s /S /Q /F'%ProgramFiles)
+				
 	except:
-		print("\t[!!] Execute como Administrador!\n")
+		pass
 
 def Add_Startup():
-	print(menu)
+	tkMessageBox.showinfo('Information', '[!!] Adicionado ao Startup!')
 	print('\t[!!] Adicionado ao Startup!\n')
 	os.chdir('C:\\ProgramData')
 	os.system('mkdir Startup-Cleandir')
@@ -139,38 +140,35 @@ rmdir * /S /Q''').strip('\n')
 			subprocess.Popen(r'reg add "HKCU\\SOFTWARE\\Microsoft\Windows\\CurrentVersion\\Run" /v "CleanDIRS" /d "%ProgramData%\\Startup-Cleandir\\start.vbs" /f', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
 
 def Remove_Startup():
-	print(menu)
-	print('\t[!] Removendo Startup!\n')
+	tkMessageBox.showinfo('Information', '[!] Removendo Startup!')
 	os.chdir('C:\\ProgramData')
 	os.system('rmdir Startup-Cleandir /S /Q')
 	print('\t[!] Startup Removido!\n')
 
 def cleanmgr():
-	print(menu)
-	print("\t[@@@] Selecione todas as TextBox e Inicie uma Limpeza Profunda!\n")
-	proc = subprocess.Popen('cleanmgr', shell=True)
-	proc.wait()
+	tkMessageBox.showinfo('Information', "[@@@] Selecione todas as TextBox e Inicie uma Limpeza Profunda!")
+	subprocess.Popen('RunDll32.exe inetcpl.cpl, ClearMyTracksByProcess 255', shell=True)
+	subprocess.Popen('cleanmgr', shell=True).wait()
 
 def clean_system():
-	print("\t[!!!] Limpeza de Cache do Sistema!\n")
-
 	subprocess.Popen('ipconfig /flushdns', shell=True)
- 	subprocess.Popen('RunDll32.exe inetcpl.cpl , ClearMyTracksByProcess 255', shell=True)
-
 	os.chdir('%s\\AppData\\Local\\Microsoft\\Windows\\INetCache\\IE'%usr)
+
 	for INetCache in os.listdir('.'):
-			if os.path.isdir(INetCache) == True:
-				os.system('rmdir %s /S /Q'%INetCache)
-			else:
-				os.system('del %s /S /Q /F'%INetCache)
+		if os.path.isdir(INetCache) == True:
+			os.system('rmdir %s /S /Q'%INetCache)
+		else:
+			os.system('del %s /S /Q /F'%INetCache)
+
 	os.chdir('C:\\WINDOWS\\Offline Web Pages')	
 	for Offline in os.listdir('.'):
-			if os.path.isdir(Offline) == True:
-				os.system('rmdir %s /S /Q'%Offline)
-			else:
-				os.system('del %s /S /Q /F'%Offline)
+		if os.path.isdir(Offline) == True:
+			os.system('rmdir %s /S /Q'%Offline)
+		else:
+			os.system('del %s /S /Q /F'%Offline)
+
+	os.chdir('C:\\Windows')
 	try:
-		os.chdir('C:\\Windows')
 		os.system("del *.log /a /s /q /f")
 	except:
 		pass
@@ -197,7 +195,7 @@ class Layout(FloatLayout):
 
 		clean_all = Button(text='Clean ALL FILES', width=250, height=30, font_size="13sp", pos=(22, 240))
 		clean_all.size_hint = (None, None)
-		clean_all.on_press = clear_all
+		clean_all.on_press = call_all_functions
 
 		Startup = Button(text='ADD Startup', width=250, height=30, font_size="13sp", pos=(22, 195))
 		Startup.size_hint = (None, None)
@@ -215,8 +213,6 @@ class Layout(FloatLayout):
 		Limpeza_System = Button(text='Limpeza de Cache do Sistema', width=250, height=30, font_size="13sp", pos=(22, 60))
 		Limpeza_System.size_hint = (None, None)
 		Limpeza_System.on_press = clean_system
-
-		self.add_widget(Label(text='[ Agradeca ao Adriel Freud <3 ]', font_size="13sp", pos=(0, -240)))
 
 		self.add_widget(temp)
 		self.add_widget(prefetch)
