@@ -8,9 +8,9 @@
 - Caso você encontrar um bug [Click-aqui](https://github.com/AdrielFreud/Clean-Temp/issues/new) e crie um issue para eu corrijir o bug.
 
 ## Imagem
-# Tkinter
+Tkinter
 ![photo](https://i.imgur.com/eQfVRWS.png)
-# Kivy
+Kivy
 ![photo](https://i.imgur.com/eQfVRWS.png))
 
 ## Características
