@@ -6,7 +6,6 @@
 import win32console, win32gui
 window = win32console.GetConsoleWindow()
 win32gui.ShowWindow(window,0)
-win32gui.ShowWindow(window,1)
 import tempfile
 import os
 import getpass
