@@ -1,7 +1,7 @@
 ## AdrielFreud
 
 ![](https://img.shields.io/badge/CleanTemp-v2.0-blue?style=flat&logo=appveyor)
-![](https://img.shields.io/badge/plataforma-win32--win64--linux64--linux32-blue?style=flat&logo=appveyor)
+![](https://img.shields.io/badge/plataforma-win32--win64-blue?style=flat&logo=appveyor)
 ![](https://img.shields.io/badge/python-3.x.x-blue)
 
 ## AVISO
