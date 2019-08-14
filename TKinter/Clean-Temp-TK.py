@@ -1,100 +1,199 @@
+# Desenvolvido por Adriel Freud!
+# Contato: businessc0rp2k17@gmail.com
+# FB: http://www.facebook.com/xrn401
+#   =>DebutySecTeamSecurity<=
+#conding: utf-8
 import win32console, win32gui
-con = 1
-win32gui.ShowWindow(win32console.GetConsoleWindow() ,con)
-import os, subprocess, shutil, webbrowser, platform
+window = win32console.GetConsoleWindow()
+win32gui.ShowWindow(window,0)
+win32gui.ShowWindow(window,1)
+import tempfile
+import os
+import getpass
 from tkinter import *
 import tkinter.messagebox
+import sys
+import webbrowser
+import subprocess
+import threading
 from ctypes import *
 
-if '64' in platform.machine():
-	path = "x64"
+cred = """\n\n
+-----------------------------------------
+  #  Desenvolvido por Adriel Freud!
+  #  Contato: businessc0rp2k17@gmail.com 
+  #  FB: http://www.facebook.com/xrn401
+  #   =>DebutySecTeamSecurity<=
+-----------------------------------------
+\n"""
+
+getuserprof = subprocess.check_output("set USERPROFILE", shell=True).split(b'=')
+usr = getuserprof[1].strip(b"\r\n")
+bar = "-:[ Limpador by Adriel ]:-"
+
+temporario = tempfile.gettempdir()
+root = Tk()
+root.title(bar)
+
+root['bg'] = 'black'
+root['bg'] = "black"
+root.geometry("300x500+200+200")
+
+menubar = Menu(root)
+root.config(menu=menubar)
+filemenu = Menu(menubar)
+menubar.add_cascade(label='Menu', menu=filemenu)
+if windll.shell32.IsUserAnAdmin() == 0:
+	tkinter.messagebox.showwarning("Warning", "Execute como administrador para uma limpeza Profunda!")
 else:
-	path = "x86"
+	pass
 
-data = """****************************************************************
-- Microsoft.NET Framework 3.5 Offline Installer 2.0
-- AdrielFreud Laboratory 20011-2019
-****************************************************************
-- https://debutysec.wordpress.com
-- Email: businessc0rp2k17@gmail.com
-Click on "Start Installation" To Start Installation"""
-ext = 'cmd /C dism /online /enable-feature /featurename:NetFX3 /source:"C:\\sources\\sxs" /LimitAccess'
+def Creditos():
+	tkinter.messagebox.showinfo("Creditos", cred)
 
-def Troubleshooting():
-	con = 1
-	win32gui.ShowWindow(win32console.GetConsoleWindow(), con)
-	os.system("cmd /C dism /online /cleanup-image /restorehealth")
-	os.system(ext)
+filemenu.add_command(label='Creditos', command=Creditos)
 
-def about():
-	webbrowser.open('https://pt.wikipedia.org/wiki/Microsoft_.NET')
+def Open_channel():
+	webbrowser.open('https://www.youtube.com/AdrielFreud')
+filemenu.add_command(label='Canal', command=Open_channel)
+def Github():
+	webbrowser.open('https://github.com/AdrielFreud')
+filemenu.add_command(label='Github', command=Github)
+def Exit():
+	sys.exit()
+	exit()
+filemenu.add_command(label='Exit', command=Exit)
+def call_all_functions():
+	list_thread = [clear_temp(), clear_prefetch(), clear_SoftwareDistribution(), clean_system(), cleanmgr()]
+	for threads in list_thread:
+		threading.Thread(target=threads, args=()).start()
+	tkinter.messagebox.showinfo("Information", "Todos os arquivos inuteis foram retirados do seu computador, Obrigado por utilizar nosso programa! Att. AdrielFreud :)")
 
-def install_log():
+def clear_temp():
 	try:
-		os.system('C:\\Windows\\logs\\DISM\\dism.log')
+		os.chdir('C:\\Windows\\Temp')
+		for temp1 in os.listdir('.'):
+			if os.path.isdir(temp1) == True:
+				os.system('rmdir %s /S /Q'%temp1)
+			else:
+				os.system('del %s /S /Q /F'%temp1)
+		os.chdir('C:\\Temp')
+		for temp2 in os.listdir('.'):
+			if os.path.isdir(temp2) == True:
+				os.system('rmdir %s /S /Q'%temp2)
+			else:
+				os.system('del %s /S /Q /F'%temp2)
+		os.chdir(temporario)
+		for temp3 in os.listdir('.'):
+			if os.path.isdir(temp3) == True:
+				os.system('rmdir %s /S /Q'%temp3)
+			else:
+				os.system('del %s /S /Q /F'%temp3)
 	except:
 		pass
-
-def disc_C():
+def clear_prefetch():
 	try:
-		os.chdir('config\\%s'%path)
-		shutil.move('sources', 'C:\\')
+		os.chdir('C:\\Windows\\Prefetch')
+		for prefetch in os.listdir('.'):
+			if os.path.isdir(prefetch) == True:
+				os.system('rmdir %s /S /Q'%prefetch)
+			else:
+				os.system('del %s /S /Q /F'%prefetch)
 	except:
 		pass
-
-def disc_D():
-	ext = ext.replace("C:\\", "D:\\")
+def clear_SoftwareDistribution():
 	try:
-		os.chdir('config\\%s'%path)
-		shutil.move('sources', 'D:\\')
+		os.chdir('C:\\Windows\\installer')
+		for installer in os.listdir('.'):
+			if os.path.isdir(installer) == True:
+				os.system('rmdir %s /S /Q'%installer)
+			else:
+				os.system('del %s /S /Q /F'%installer)
+		os.chdir('C:\\Windows\\SoftwareDistribution\\Download')
+		for Software in os.listdir('.'):
+			if os.path.isdir(Software) == True:
+				os.system('rmdir %s /S /Q'%Software)
+			else:
+				os.system('del %s /S /Q /F'%Software)
+		os.chdir('C:\\Windows\\Downloaded Program Files')
+		for ProgramFiles in os.listdir('.'):
+			if os.path.isdir(ProgramFiles) == True:
+				os.system('rmdir %s /S /Q'%ProgramFiles)
+			else:
+				os.system('del %s /S /Q /F'%ProgramFiles)
+				
 	except:
 		pass
+info_sistema = Label(root, text='Limpador de Arquivos Temporarios do Sistema', bg='black', fg='white', font="Arial 10").place(x=12,y=10)
+temp = Button(root, text='Clean TEMP', bg='#4F4F4F', fg='white', width=30, command=clear_temp).place(x=40, y=60)
+prefetch = Button(root, text='Clean PREFETCH', bg='#4F4F4F', fg='white', width=30, command=clear_prefetch).place(x=40, y=100)
+Distribution = Button(root, text='Clean SoftwareDistribution', bg='#4F4F4F', fg='white', width=30, command=clear_SoftwareDistribution).place(x=40, y=140)
+####
+info_clean_all = Label(root, text='> Limpador em Massa de Arquivos <', bg='black', fg='white', font="Arial 10").place(x=40, y=195)
+clean_all = Button(root, text='Clean ALL FILES', bg='#4F4F4F', fg='white', width=30, command=call_all_functions).place(x=40, y=250)
+# - Startup - #
 
-def disc_F():
-	ext = ext.replace("C:\\", "F:\\")
+def Add_Startup():
+	tkinter.messagebox.showinfo('Information', '[!!] Adicionado ao Startup!')
+	os.chdir('C:\\ProgramData')
+	os.system('mkdir Startup-Cleandir')
+	os.chdir('Startup-Cleandir/')
+	with open('start.vbs', 'w') as w:
+		w.write('Set WshShell = CreateObject("WScript.Shell")\nWshShell.Run chr(34) & "start.bat" & Chr(34), 0\nSet WshShell = Nothing')
+		w.close()
+		with open('clean.bat', 'w') as clean:
+			clean.write('''
+@echo off
+cd "C:\\Windows\\SoftwareDistribution\\Download"
+del * /S /Q /F
+rmdir * /S /Q
+cd "C:\\Windows\\Prefetch"
+del * /S /Q /F
+rmdir * /S /Q
+cd "C:\\Windows\\Temp"
+del * /S /Q /F
+rmdir * /S /Q
+cd "C:\\Temp"
+del * /S /Q /F
+rmdir * /S /Q
+cd %temp%
+del * /S /Q /F
+rmdir * /S /Q''')
+			clean.close()
+			subprocess.Popen('reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v "CleanDIRS" /d "%ProgramData%\\Startup-Cleandir\\start.vbs" /f', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
+
+def Remove_Startup():
+	tkinter.messagebox.showinfo('Information', '[!] Removendo Startup!')
+	os.chdir('C:\\ProgramData')
+	os.system('rmdir Startup-Cleandir /S /Q')
+	print('\t[!] Startup Removido!\n')
+
+def cleanmgr():
+	tkinter.messagebox.showinfo('Information', "[@@@] Selecione todas as TextBox e Inicie uma Limpeza Profunda!")
+	subprocess.Popen('RunDll32.exe inetcpl.cpl, ClearMyTracksByProcess 255', shell=True)
+	subprocess.Popen('cleanmgr', shell=True).wait()
+
+def clean_system():
+	subprocess.Popen('ipconfig /flushdns', shell=True)
+	os.chdir('%s\\AppData\\Local\\Microsoft\\Windows\\INetCache\\IE'%usr)
+	for INetCache in os.listdir('.'):
+		if os.path.isdir(INetCache) == True:
+			os.system('rmdir %s /S /Q'%INetCache)
+		else:
+			os.system('del %s /S /Q /F'%INetCache)
+	os.chdir('C:\\WINDOWS\\Offline Web Pages')	
+	for Offline in os.listdir('.'):
+		if os.path.isdir(Offline) == True:
+			os.system('rmdir %s /S /Q'%Offline)
+		else:
+			os.system('del %s /S /Q /F'%Offline)
+	os.chdir('C:\\Windows')
 	try:
-		os.chdir('config\\%s'%path)
-		shutil.move('sources', 'F:\\')
+		os.system("del *.log /a /s /q /f")
 	except:
 		pass
-		
-def disc_G():
-	ext = ext.replace("C:\\", "G:\\")
-	try:
-		os.chdir('config\\%s'%path)
-		shutil.move('sources', 'G:\\')
-	except:
-		pass
-
-def main(root = Tk()):
-
-	if windll.shell32.IsUserAnAdmin() == 0:
-		tkinter.messagebox.showinfo("Microsoft .NET Reparir TOOL", "Please restart and run this application as administrator")
-
-	root.title('Microsoft .NET Repair TOOL - Adriel Freud')
-	root['bg'] = 'white'
-	r1 = IntVar()
-
-	Label(root, text="Microsoft .NET Framework", font="Arial 20", bg='white').place(x=5, y=5)
-	Label(root, text="Powered Adriel Freud...", font="Arial 10", bg='white').place(x=15, y=40)
-
-	Button(root, text="Open Install Log", command=install_log, font="Arial 10").place(x=490, y=25)
-	Button(root, text="About App", command=about, font="Arial 10", width=12).place(x=490, y=60)
-	
-	Label(root, text="Installation Settings (Select Drive):", bg='white', font="Arial 11").place(x=20, y=100)
-	Button(root, text="C:\\", bg='white', font='Arial 10', command=disc_C).place(x=40, y=140)
-	Button(root, text="D:\\", bg='white', font='Arial 10', command=disc_D).place(x=80, y=140)
-	Button(root, text="F:\\", bg='white', font='Arial 10', command=disc_F).place(x=120, y=140)
-	Button(root, text="G:\\", bg='white', font='Arial 10', command=disc_G).place(x=160, y=140)
-
-	Label(root, text="Information Console:", font="Arial 11", bg='white').place(x=10, y=230)
-	texto = Text(root, height=8, width=75, bg="black", fg='white')
-	texto.place(x=5, y=260)
-	texto.insert(END, data)
-
-	Button(root, text="Start Installation", font='Arial 10', command=Troubleshooting, height=2, width=15).place(x=450, y=200)
-
-	root.geometry('600x400')
-	root.mainloop()
-
-main()
+Startup = Button(root, text='ADD Startup', bg='#4F4F4F', fg='white', width=30, command=Add_Startup).place(x=40, y=290)
+remove_Startup = Button(root, text='REMOVE Startup', bg='#4F4F4F', fg='white', width=30, command=Remove_Startup).place(x=40, y=330)
+Button(root, text='Limpeza de Disco', bg='#4F4F4F', fg='white', width=30, command=cleanmgr).place(x=40, y=370)
+Button(root, text='Limpeza de Cache do Systema', bg='#4F4F4F', fg='white', width=30, command=clean_system).place(x=40, y=410)
+root.mainloop()
