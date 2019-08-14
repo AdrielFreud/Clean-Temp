@@ -5,16 +5,16 @@
 #conding: utf-8
 import win32console, win32gui
 window = win32console.GetConsoleWindow()
-win32gui.ShowWindow(window,0)
+win32gui.ShowWindow(window,1)
 import tempfile
 import os
 import getpass
-from Tkinter import *
+from tkinter import *
+import tkinter.messagebox
 import sys
 import webbrowser
 import subprocess
 import threading
-import tkMessageBox
 from ctypes import *
 
 cred = """\n\n
@@ -25,15 +25,15 @@ cred = """\n\n
   #   =>DebutySecTeamSecurity<=
 -----------------------------------------
 \n"""
-getuserprof = subprocess.check_output('set USERPROFILE', shell=True).split('=')
-usr = getuserprof[1].strip('\r\n')
+getuserprof = subprocess.check_output("set USERPROFILE", shell=True).split(b'=')
+usr = getuserprof[1].strip(b"\r\n")
 bar = "-:[ Limpador by Adriel ]:-"
 
 temporario = tempfile.gettempdir()
 root = Tk()
 root.title(bar)
 
-root['bg'] = 'black'
+root['bg'] = "black"
 root.geometry("300x500+200+200")
 
 menubar = Menu(root)
@@ -41,12 +41,12 @@ root.config(menu=menubar)
 filemenu = Menu(menubar)
 menubar.add_cascade(label='Menu', menu=filemenu)
 if windll.shell32.IsUserAnAdmin() == 0:
-	tkMessageBox.showwarning("Warning", "Execute como administrador para uma limpeza Profunda!")
+	tkinter.messagebox.showwarning("Warning", "Execute como administrador para uma limpeza Profunda!")
 else:
 	pass
 
 def Creditos():
-	tkMessageBox.showinfo("Creditos", cred)
+	tkinter.messagebox.showinfo("Creditos", cred)
 
 filemenu.add_command(label='Creditos', command=Creditos)
 
@@ -70,7 +70,7 @@ def call_all_functions():
 	list_thread = [clear_temp(), clear_prefetch(), clear_SoftwareDistribution(), clean_system(), cleanmgr()]
 	for threads in list_thread:
 		threading.Thread(target=threads, args=()).start()
-	tkMessageBox.showinfo("Information", "Todos os arquivos inuteis foram retirados do seu computador, Obrigado por utilizar nosso programa! Att. AdrielFreud :)")
+	tkinter.messagebox.showinfo("Information", "Todos os arquivos inuteis foram retirados do seu computador, Obrigado por utilizar nosso programa! Att. AdrielFreud :)")
 
 def clear_temp():
 	try:
@@ -143,7 +143,7 @@ clean_all = Button(root, text='Clean ALL FILES', bg='#4F4F4F', fg='white', width
 # - Startup - #
 
 def Add_Startup():
-	tkMessageBox.showinfo('Information', '[!!] Adicionado ao Startup!')
+	tkinter.messagebox.showinfo('Information', '[!!] Adicionado ao Startup!')
 	os.chdir('C:\\ProgramData')
 	os.system('mkdir Startup-Cleandir')
 	os.chdir('Startup-Cleandir/')
@@ -172,13 +172,13 @@ rmdir * /S /Q''')
 			subprocess.Popen('reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v "CleanDIRS" /d "%ProgramData%\\Startup-Cleandir\\start.vbs" /f', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
 
 def Remove_Startup():
-	tkMessageBox.showinfo('Information', '[!] Removendo Startup!')
+	tkinter.messagebox.showinfo('Information', '[!] Removendo Startup!')
 	os.chdir('C:\\ProgramData')
 	os.system('rmdir Startup-Cleandir /S /Q')
 	print('\t[!] Startup Removido!\n')
 
 def cleanmgr():
-	tkMessageBox.showinfo('Information', "[@@@] Selecione todas as TextBox e Inicie uma Limpeza Profunda!")
+	tkinter.messagebox.showinfo('Information', "[@@@] Selecione todas as TextBox e Inicie uma Limpeza Profunda!")
 	subprocess.Popen('RunDll32.exe inetcpl.cpl, ClearMyTracksByProcess 255', shell=True)
 	subprocess.Popen('cleanmgr', shell=True).wait()
 
