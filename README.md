@@ -11,7 +11,7 @@
 #Tkinter
 ![photo](https://i.imgur.com/eQfVRWS.png)
 #Kivy
-![photo](https://i.imgur.com/eQfVRWS.png)
+![photo](https://i.imgur.com/lU4tS4O.png)
 
 ## Características
   - Limpador de Arquivos Temporarios.
