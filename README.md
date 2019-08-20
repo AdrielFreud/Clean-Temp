@@ -23,8 +23,8 @@
  
  ## Dowloand
 Baixe diretamente do github com:
- - Kivy: <a href="https://mega.nz/#!3V8VxKha!eXBw_g2rCX0-v4OlgMgQ0xDCdF8c-R7SHd4i6bb0xww" target="_blank">Clique Aqui.</a></p>
- - Tkinter: <a href="https://mega.nz/#!3V8VxKha!eXBw_g2rCX0-v4OlgMgQ0xDCdF8c-R7SHd4i6bb0xww" target="_blank">Clique Aqui.</a></p>
+ - Kivy: <a href="https://mega.nz/#!CdslyIKT!hzic8-wSAaDzl3BXIMbszavRJAcKhINgv6Y8lMa8pRk" target="_blank">Clique Aqui.</a></p>
+ - Tkinter: <a href="https://mega.nz/#!WcsVlSyB!Y7bUDM6NimGPMMUWAKbBmpSO_xvbfznCet09en-eP4Y" target="_blank">Clique Aqui.</a></p>
 
 ## Requerimentos
  - Python3
