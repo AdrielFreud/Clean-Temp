@@ -5,7 +5,7 @@
 ![](https://img.shields.io/badge/python-3.x.x-blue)
 
 ## AVISO
-- Caso você encontrar um bug [Click-aqui](https://github.com/AdrielFreud/Clean-Temp/issues/new) e crie um issue para eu corrijir o bug.
+- Caso você encontrar um bug [Click-aqui](https://github.com/AdrielFreud/Clean-Temp/issues/new) crie um issue para eu corrigi-lo.
 
 ## Imagem
 #Tkinter
@@ -21,7 +21,7 @@
   - Limpeza de Cache de Sistema.
   - Modo Startup (Ao Reiniciar, inicie com o Limpador).
  
- ## Dowloand
+ ## Download
 Baixe diretamente do github com:
  - Kivy: <a href="https://mega.nz/#!CdslyIKT!hzic8-wSAaDzl3BXIMbszavRJAcKhINgv6Y8lMa8pRk" target="_blank">Clique Aqui.</a></p>
  - Tkinter: <a href="https://mega.nz/#!WcsVlSyB!Y7bUDM6NimGPMMUWAKbBmpSO_xvbfznCet09en-eP4Y" target="_blank">Clique Aqui.</a></p>
